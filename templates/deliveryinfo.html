@@ -1,0 +1,676 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="delivery-container">
+    <div class="page-header">
+        <h1 class="page-title">
+            <i class="fas fa-shipping-fast"></i>
+            Delivery Information
+        </h1>
+        <p class="page-subtitle">Please provide your delivery details to ensure your plants reach you safely</p>
+    </div>
+
+    <div class="delivery-content">
+        <div class="delivery-form-container">
+            <div class="card delivery-card">
+                <div class="form-header">
+                    <div class="step-indicator">
+                        <div class="step active">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Delivery Info</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Payment</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Confirmation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <form method="POST" class="delivery-form" id="deliveryForm">
+                    <input type="hidden" name="plant_id" value="{{ plant_id }}">
+
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-user"></i>
+                            Personal Information
+                        </h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                {{ form.name.label(class="form-label") }}
+                                {{ form.name(class="form-control", placeholder="Enter your full name") }}
+                                <div class="input-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half-width">
+                                {{ form.email.label(class="form-label") }}
+                                {{ form.email(class="form-control", placeholder="your.email@example.com") }}
+                                <div class="input-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                            </div>
+                            <div class="form-group half-width">
+                                {{ form.phone_number.label(class="form-label") }}
+                                {{ form.phone_number(class="form-control", placeholder="+91 XXXXX XXXXX") }}
+                                <div class="input-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Delivery Address
+                        </h3>
+                        
+                        <div class="form-group">
+                            {{ form.address.label(class="form-label") }}
+                            {{ form.address(class="form-control textarea", placeholder="Enter any address (e.g., House no., Street, Area, City)", rows="3") }}
+                            <div class="input-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group half-width">
+                                {{ form.pincode.label(class="form-label") }}
+                                {{ form.pincode(class="form-control", placeholder="Enter 6-digit pincode") }}
+                                <div class="input-icon">
+                                    <i class="fas fa-map-pin"></i>
+                                </div>
+                            </div>
+                            <div class="form-group half-width">
+                                {{ form.homeoffice.label(class="form-label") }}
+                                {{ form.homeoffice(class="form-control select") }}
+                                <div class="input-icon">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="{{ url_for('showproduct') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i>
+                            Back to Products
+                        </a>
+                        {{ form.submit(class="btn btn-primary", value="Proceed to Payment") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="delivery-info-sidebar">
+            <div class="card delivery-benefits">
+                <h3 class="benefits-title">
+                    <i class="fas fa-truck"></i>
+                    Delivery Benefits
+                </h3>
+                <ul class="benefits-list">
+                    <li>
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <strong>Safe Packaging</strong>
+                            <p>Plants protected with eco-friendly materials</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Fast Delivery</strong>
+                            <p>Express delivery within 2-3 business days</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-leaf"></i>
+                        <div>
+                            <strong>Plant Care Guide</strong>
+                            <p>Free care instructions with every order</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fas fa-undo-alt"></i>
+                        <div>
+                            <strong>7-Day Guarantee</strong>
+                            <p>Replace if plants don't arrive healthy</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card delivery-tips">
+                <h3 class="tips-title">
+                    <i class="fas fa-lightbulb"></i>
+                    Delivery Tips
+                </h3>
+                <div class="tips-content">
+                    <div class="tip">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Be available during delivery hours (9 AM - 6 PM)</p>
+                    </div>
+                    <div class="tip">
+                        <i class="fas fa-thermometer-half"></i>
+                        <p>Keep plants in shade immediately after delivery</p>
+                    </div>
+                    <div class="tip">
+                        <i class="fas fa-tint"></i>
+                        <p>Water gently within 24 hours of arrival</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .delivery-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+    }
+
+    .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .page-title {
+        font-size: 2.8rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .page-title i {
+        color: var(--accent-color);
+    }
+
+    .page-subtitle {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .delivery-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .delivery-card {
+        padding: 2.5rem;
+    }
+
+    .form-header {
+        margin-bottom: 2.5rem;
+    }
+
+    .step-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+
+    .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--border-color);
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .step.active .step-number {
+        background: var(--primary-color);
+        color: white;
+        box-shadow: 0 0 0 4px rgba(45, 90, 39, 0.2);
+    }
+
+    .step-label {
+        margin-top: 8px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-muted);
+    }
+
+    .step.active .step-label {
+        color: var(--primary-color);
+    }
+
+    .step-line {
+        width: 80px;
+        height: 2px;
+        background: var(--border-color);
+        margin: 0 10px;
+    }
+
+    .form-section {
+        margin-bottom: 2.5rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-section:last-of-type {
+        border-bottom: none;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        position: relative;
+    }
+
+    .form-group.full-width {
+        flex: 1;
+    }
+
+    .form-group.half-width {
+        flex: 1;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+        font-size: 0.95rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 15px 20px 15px 50px;
+        border: 2px solid var(--border-color);
+        border-radius: 12px;
+        background: var(--bg-color);
+        color: var(--text-color);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-control.textarea {
+        resize: vertical;
+        min-height: 100px;
+        padding-top: 15px;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(45, 90, 39, 0.1);
+        background: var(--surface-color);
+    }
+
+    .input-icon {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-muted);
+        font-size: 1.1rem;
+        pointer-events: none;
+        transition: all 0.3s ease;
+    }
+
+    .form-group:focus-within .input-icon {
+        color: var(--primary-color);
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding-top: 1.5rem;
+    }
+
+    .delivery-info-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .delivery-benefits,
+    .delivery-tips {
+        padding: 2rem;
+    }
+
+    .benefits-title,
+    .tips-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .benefits-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .benefits-list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .benefits-list li:last-child {
+        border-bottom: none;
+    }
+
+    .benefits-list i {
+        color: var(--accent-color);
+        font-size: 1.2rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    .benefits-list strong {
+        display: block;
+        color: var(--text-color);
+        margin-bottom: 4px;
+    }
+
+    .benefits-list p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    .tips-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .tip {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 1rem;
+        background: var(--bg-color);
+        border-radius: 10px;
+        border-left: 4px solid var(--accent-color);
+    }
+
+    .tip i {
+        color: var(--accent-color);
+        font-size: 1.1rem;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+
+    .tip p {
+        margin: 0;
+        color: var(--text-color);
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .delivery-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .delivery-info-sidebar {
+            order: -1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .page-title {
+            font-size: 2.2rem;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .step-indicator {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .step-line {
+            width: 2px;
+            height: 30px;
+            margin: 0;
+        }
+
+        .form-row {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-actions {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-actions .btn {
+            width: 100%;
+        }
+
+        .delivery-card {
+            padding: 1.5rem;
+        }
+    }
+
+    /* Form Validation Styles */
+    .form-control:invalid {
+        border-color: var(--danger-color);
+    }
+
+    .form-control:valid {
+        border-color: var(--success-color);
+    }
+
+    /* Loading state */
+    .btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    /* Enhanced hover effects */
+    .delivery-benefits:hover,
+    .delivery-tips:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(45, 90, 39, 0.15);
+    }
+
+    .tip:hover {
+        background: var(--surface-color);
+        transform: translateX(5px);
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('deliveryForm');
+        const inputs = form.querySelectorAll('.form-control');
+
+        // Add real-time validation
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+
+            input.addEventListener('input', function() {
+                if (this.classList.contains('error')) {
+                    validateField(this);
+                }
+            });
+        });
+
+        // Phone number formatting
+        const phoneInput = form.querySelector('input[name="phone_number"]');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 10) {
+                    value = value.substring(0, 10);
+                }
+                this.value = value;
+            });
+        }
+
+        // Pincode validation
+        const pincodeInput = form.querySelector('input[name="pincode"]');
+        if (pincodeInput) {
+            pincodeInput.addEventListener('input', function() {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 6) {
+                    value = value.substring(0, 6);
+                }
+                this.value = value;
+            });
+        }
+
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+
+            // Remove previous error states
+            field.classList.remove('error');
+            const existingError = field.parentNode.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+
+            // Field-specific validation
+            if (field.name === 'name' && value.length < 2) {
+                isValid = false;
+                showError(field, 'Name must be at least 2 characters long');
+            }
+
+            if (field.name === 'email' && !isValidEmail(value)) {
+                isValid = false;
+                showError(field, 'Please enter a valid email address');
+            }
+
+            if (field.name === 'phone_number' && value.length !== 10) {
+                isValid = false;
+                showError(field, 'Phone number must be 10 digits');
+            }
+
+            if (field.name === 'pincode' && value.length !== 6) {
+                isValid = false;
+                showError(field, 'Pincode must be 6 digits');
+            }
+
+            if (field.name === 'address' && value.length < 1) {
+                isValid = false;
+                showError(field, 'Address is required');
+            }
+
+            return isValid;
+        }
+
+        function showError(field, message) {
+            field.classList.add('error');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.style.color = 'var(--danger-color)';
+            errorDiv.style.fontSize = '0.85rem';
+            errorDiv.style.marginTop = '5px';
+            errorDiv.textContent = message;
+            field.parentNode.appendChild(errorDiv);
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Form submission with minimal validation
+        form.addEventListener('submit', function(e) {
+            let isFormValid = true;
+            
+            // Only validate required fields, not address length
+            const requiredFields = ['name', 'email', 'phone_number', 'address', 'pincode'];
+            
+            requiredFields.forEach(fieldName => {
+                const field = form.querySelector(`[name="${fieldName}"]`);
+                if (field && field.value.trim() === '') {
+                    isFormValid = false;
+                    showError(field, `${fieldName.replace('_', ' ')} is required`);
+                } else if (field) {
+                    // Only validate format for specific fields
+                    if (fieldName === 'email' && !isValidEmail(field.value.trim())) {
+                        isFormValid = false;
+                        showError(field, 'Please enter a valid email address');
+                    }
+                    if (fieldName === 'phone_number' && field.value.trim().length < 10) {
+                        isFormValid = false;
+                        showError(field, 'Phone number must be at least 10 digits');
+                    }
+                    if (fieldName === 'pincode' && field.value.trim().length < 6) {
+                        isFormValid = false;
+                        showError(field, 'Pincode must be at least 6 digits');
+                    }
+                }
+            });
+
+            if (!isFormValid) {
+                e.preventDefault();
+                // Scroll to first error
+                const firstError = form.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}
